@@ -1,0 +1,99 @@
+[gd_scene load_steps=7 format=3 uid="uid://dste3pi7enpmt"]
+
+[ext_resource type="Script" uid="uid://c3g4qjtewr0tk" path="res://main.gd" id="1_ig7tw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7dm0k"]
+size = Vector3(5, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+size = Vector3(0.1, 10, 1)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_0xm2m"]
+bounce = 1.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_h2yge"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0xm2m"]
+size = Vector3(2, 0.1, 1)
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ig7tw")
+
+[node name="Table" type="Node3D" parent="."]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Table"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D"]
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D2"]
+shape = SubResource("BoxShape3D_7dm0k")
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, -2.5, 0)
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="StaticBody3D4" type="StaticBody3D" parent="Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Table/StaticBody3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, -2.5, 0)
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.54439, 12.9512)
+
+[node name="Ball" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.17725, 0)
+collision_layer = 2
+axis_lock_linear_z = true
+physics_material_override = SubResource("PhysicsMaterial_0xm2m")
+can_sleep = false
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ball"]
+shape = SubResource("SphereShape3D_h2yge")
+
+[node name="Right Paddle Joint" type="JoltGeneric6DOFJoint3D" parent="."]
+angular_limit_x/upper = 0.523599
+angular_limit_x/lower = -0.523599
+angular_motor_x/enabled = true
+angular_motor_x/target_velocity = -17.4533
+angular_motor_x/max_torque = 100000.0
+node_b = NodePath("../Right Paddle Rigidbody")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0.841, 0)
+
+[node name="Right Paddle Rigidbody" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.841, 0)
+collision_mask = 2
+can_sleep = false
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Right Paddle Rigidbody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+shape = SubResource("BoxShape3D_0xm2m")
+
+[node name="Left Paddle Joint" type="JoltGeneric6DOFJoint3D" parent="."]
+angular_limit_x/upper = 0.523599
+angular_limit_x/lower = -0.523599
+angular_motor_x/enabled = true
+angular_motor_x/target_velocity = 17.4533
+angular_motor_x/max_torque = 100000.0
+node_b = NodePath("../Left Paddle Rigidbody")
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0.841, 0)
+
+[node name="Left Paddle Rigidbody" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.841, 0)
+collision_mask = 2
+can_sleep = false
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Left Paddle Rigidbody"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+shape = SubResource("BoxShape3D_0xm2m")
