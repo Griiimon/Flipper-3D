@@ -2,6 +2,6 @@
 
 
 
-Install the Jolt Extension from the AssetLib
-Enable Visible Collision Shapes in the Debug menu
-Use left and right arrow keys for the paddles
+- Install the Jolt Extension from the AssetLib
+- Enable Visible Collision Shapes in the Debug menu
+- Use left and right arrow keys for the paddles
